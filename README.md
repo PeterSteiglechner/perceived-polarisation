@@ -6,12 +6,12 @@ This project analyses perceived and actual polarisation in political debates usi
 We provide an example of this analysis for the German climate debate using two waves of the European Social Survey (ESS). The analysis aims to understand polarisation contributions from opinion divergence between individuals and from perception changes between the identity groups.
 
 ### Requirements
-- Python 3.7 or later
-- Required Python packages: pandas, numpy
+- Python 3.11 or later
+- Required Python packages: pandas, numpy, (for the analysis scipy, matplotlib, seaborn)
 
 ### Installation
-1. Clone the repository: `git clone perceivedPolarisation`
-2. Install the required packages: `pip install -r requirements.txt`
+1. Clone the repository: `git clone https://github.com/PeterSteiglechner/perceived-polarisation`
+2. Install the required packages: `conda create --name <env> --file requirements.txt`
 
 ### Usage
 
