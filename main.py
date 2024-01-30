@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import time 
+import sys
 
 
 def prepareData(data, wave_t0_prtcl, wave_t1_prtcl, ESSparty_dict_t0, ESSparty_dict_t1, variables, variables_na={}):
@@ -226,6 +227,9 @@ def calc_polarisation_PxPs(df, waves, parties, variables, Trafo):
 
 if __name__ == "__main__":
     
+    folder = "inputdata/"
+    # on ZMT Datalab, use /home/peter.steiglechner/labspaces/cognitive-biases-in-opinion-formation/data/ms3-subjOpSpace/ess/
+    
     # Load data
     cntry = "DE"
     variables = ["ccnthum", "wrclmch"]
@@ -260,7 +264,7 @@ if __name__ == "__main__":
     cols = ["essround", "anweight", "cntry", "prtdgcl"] + variables
     rawdataC = pd.concat(
             [
-                pd.read_csv(f"/home/peter.steiglechner/labspaces/cognitive-biases-in-opinion-formation/data/ms3-subjOpSpace/ess/{essfile}.csv", 
+                pd.read_csv(f"{folder}{essfile}.csv", 
                             usecols=cols + [prtclcol]) 
                 for essfile, prtclcol in zip(["ESS8e02_3", "ESS10SC"], [wave_t0_prtcl, wave_t1_prtcl])
             ], 
