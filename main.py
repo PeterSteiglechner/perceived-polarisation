@@ -28,15 +28,15 @@ def prepareData(data, wave_t0_prtcl, wave_t1_prtcl, ESSparty_dict_t0, ESSparty_d
     for p in [77, 99]:  # coded "Refusal" as np.nan
         ESSparty_dict_t0[p] = -1
         ESSparty_dict_t1[p] = -1
-    data[wave_t0_prtcl].replace(to_replace=ESSparty_dict_t0, inplace=True)
-    data[wave_t1_prtcl].replace(to_replace=ESSparty_dict_t1, inplace=True)
+    data[wave_t0_prtcl] = data[wave_t0_prtcl].replace(to_replace=ESSparty_dict_t0)
+    data[wave_t1_prtcl] = data[wave_t1_prtcl].replace(to_replace=ESSparty_dict_t1)
     for prtcl in [wave_t0_prtcl, wave_t1_prtcl]:
         data.loc[(data.prtdgcl > 3) & (data[prtcl] != -1), prtcl] = "None"
     data["identity"] = data[wave_t1_prtcl].combine_first(data[wave_t0_prtcl])
-    data["identity"].replace(to_replace=[-1], value=np.nan, inplace=True)
+    data["identity"] = data["identity"].replace(to_replace=[-1], value=np.nan)
 
     for var in variables:
-        data[var].replace(to_replace=variables_na.get(var, []), value=np.nan, inplace=True)
+        data[var] = data[var].replace(to_replace=variables_na.get(var, []), value=np.nan)
     
     # Remove unnecessary columns
     data = data.loc[:, variables + ['identity', 'essround', 'anweight']]
@@ -228,7 +228,6 @@ def calc_polarisation_PxPs(df, waves, parties, variables, Trafo):
 if __name__ == "__main__":
     
     folder = "inputdata/"
-    # on ZMT Datalab, use /home/peter.steiglechner/labspaces/cognitive-biases-in-opinion-formation/data/ms3-subjOpSpace/ess/
     
     # Load data
     cntry = "DE"
